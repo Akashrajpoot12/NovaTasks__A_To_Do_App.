@@ -1,0 +1,91 @@
+/* Glassmorphism & Smoothness */
+.backdrop-blur-lg {
+  backdrop-filter: blur(12px);
+}
+
+/* Task Completion */
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+  color: #6b7280;
+}
+
+/* Task Animation */
+.task-item {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus Mode */
+.focus-mode {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  text-align: center;
+  padding: 20px;
+}
+
+.focus-mode button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  background: white;
+  color: #667eea;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+
+.focus-mode button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* Hover Glow for Submit Button */
+#submitBtn:hover {
+  box-shadow: 0 0 20px rgba(126, 87, 194, 0.4);
+}
+
+/* Priority Icons */
+.fa-star {
+  transition: all 0.2s;
+}
+
+/* Better List Item */
+.task-item {
+  transition: all 0.3s;
+}
+
+.task-item:hover {
+  background: rgba(99, 102, 241, 0.03);
+}
+
+/* Smooth Dark Mode */
+body {
+  transition: background-color 0.5s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .focus-mode h1 {
+    font-size: 1.8rem;
+  }
+}

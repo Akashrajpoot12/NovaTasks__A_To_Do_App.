@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100 dark:bg-gray-950 text-gray-800 dark:text-gray-100">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#5850ec">
+  <title>NovaTasks ✨</title>
+  <link rel="manifest" href="manifest.json">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          backdropBlur: {
+            xs: '2px'
+          },
+          boxShadow: {
+            soft: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="h-full bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:to-gray-950 transition-all duration-500">
+
+  <div class="container mx-auto p-4 max-w-3xl mt-8">
+    <!-- Main Card -->
+    <div class="backdrop-blur-lg bg-white/80 dark:bg-gray-800/90 rounded-3xl shadow-2xl border border-white/30 dark:border-gray-700 overflow-hidden transition-all duration-500 transform hover:scale-[1.01]">
+
+      <!-- Header -->
+      <header class="p-7 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-t-3xl">
+        <div class="flex justify-between items-center">
+          <h1 class="text-3xl font-bold tracking-tight">✨ NovaTasks</h1>
+          <div class="flex gap-3">
+            <button id="focusModeBtn" class="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium hover:bg-white/30 transition flex items-center gap-1">
+              <i class="fas fa-bolt"></i> Focus
+            </button>
+            <button id="themeToggle" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Input Section -->
+      <div class="p-6 space-y-5">
+        <form id="taskForm" class="relative">
+          <div class="flex flex-col sm:flex-row gap-3">
+            <!-- Task Input -->
+            <input
+              type="text"
+              id="taskInput"
+              placeholder="What needs to be done?"
+              class="flex-grow p-4 pl-5 border border-gray-200 dark:border-gray-600 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 bg-white/70 dark:bg-gray-700/60 backdrop-blur-sm text-gray-800 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 shadow-sm"
+            />
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              id="submitBtn"
+              class="sm:w-16 w-full h-12 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-2xl font-semibold hover:from-indigo-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800 transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center group"
+            >
+              <i class="fas fa-paper-plane group-hover:rotate-12 transition-transform duration-200"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- Advanced Inputs -->
+        <div class="grid sm:grid-cols-3 gap-3">
+          <input type="datetime-local" id="dueDateInput" class="p-3 rounded-xl bg-white/70 dark:bg-gray-700/60 border border-gray-200 dark:border-gray-600 backdrop-blur-sm focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-900 outline-none transition">
+
+          <select id="priorityInput" class="p-3 rounded-xl bg-white/70 dark:bg-gray-700/60 border border-gray-200 dark:border-gray-600 backdrop-blur-sm focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-900 outline-none appearance-none bg-no-repeat transition">
+            <option value="low">🟢 Low</option>
+            <option value="medium">🟡 Medium</option>
+            <option value="high">🔴 High</option>
+          </select>
+
+          <select id="categoryInput" class="p-3 rounded-xl bg-white/70 dark:bg-gray-700/60 border border-gray-200 dark:border-gray-600 backdrop-blur-sm focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-900 outline-none transition">
+            <option value="Work">💼 Work</option>
+            <option value="Personal">🏡 Personal</option>
+            <option value="Study">📚 Study</option>
+            <option value="Health">💪 Health</option>
+            <option value="Shopping">🛒 Shopping</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="px-6 pb-4">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔍 Search tasks..."
+          class="w-full p-3 rounded-2xl bg-gray-100 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 focus:outline-none focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 transition"
+        />
+      </div>
+
+      <!-- Task List -->
+      <ul id="taskList" class="divide-y dark:divide-gray-700 min-h-24 p-1"></ul>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="p-16 text-center text-gray-500 dark:text-gray-400">
+        <i class="fas fa-clipboard-check text-7xl mb-4 opacity-30 text-indigo-300 dark:text-indigo-800"></i>
+        <p class="text-xl font-medium">Your day is clear! 🌤️</p>
+        <p class="text-sm mt-1">Add a task to get started</p>
+      </div>
+
+      <!-- AI Suggestion -->
+      <div id="aiSuggestion" class="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 text-blue-700 dark:text-blue-300 hidden border-t dark:border-gray-700 text-sm">
+        <i class="fas fa-robot mr-2"></i> <strong>AI:</strong> <span id="aiText">Keep going!</span>
+      </div>
+
+      <!-- Footer -->
+      <div class="p-3 text-center text-xs text-gray-500 dark:text-gray-400">
+        ✨ Drag to reorder • 💬 Edit on click • 🌐 Offline First
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.min.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/app.js" defer></script>
+  <script src="js/ai.js" defer></script>
+</body>
+</html>
